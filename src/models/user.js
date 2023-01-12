@@ -41,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
   User.beforeCreate((user)=>{
+    /**
+     * user--> This user object is the same object that we are trying to create
+     * beforeCreate is a trigger method in sequelize which is used to trigger
+     * something before creation
+     */
     const encryptedPassword = bcrypt.hashSync(user.password,SALT)
     user.password = encryptedPassword
   })
