@@ -5,6 +5,8 @@ const { PORT } = require('./config/serverConfig')
 
 const apiRoutes = require('./routes/index')
 
+const UserRepository = require('./repository/user-repository')
+
 const {User} = require('./models/index')
 const bcrypt = require('bcrypt')
 const prepareAndStartServer=()=>{
@@ -21,6 +23,9 @@ const prepareAndStartServer=()=>{
         const haspassword = bcrypt.compareSync(incomingPassword, user.password);
         console.log(haspassword)
         */
+       /*const user = new UserRepository()
+       const res = await user.getUserById(2)
+       console.log(res.email,res.id)*/
     })
 }
 prepareAndStartServer()

@@ -26,6 +26,17 @@ class UserServices{
             throw {error};
         }
     }
+    async getUserById(id){
+        console.log("id from userservice",id)
+        try {
+            const response = await this.userRepository.getUserById(id)
+            console.log(response)
+            return response
+        } catch (error) {
+            console.log("Error from userservice");
+            throw {error};
+        }
+    }
 }
 
 module.exports = UserServices

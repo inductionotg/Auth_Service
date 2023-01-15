@@ -43,7 +43,30 @@ const destroy = async (req,res) =>{
     }
 }
 
+const getUser = async (req,res) =>{
+    console.log(req.params.id)
+    try {
+        const response = await userService.getUserById(req.params.id)
+        console.log(response)
+        return res.status(201).json({
+            message:'User fetched successfully',
+            success:true,
+            data:{response},
+            err:{}
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            message:'User not fetched successfully',
+            success:false,
+            data:{},
+            err:{error}
+        })
+    }
+}
+
 module.exports = {
     create,
-    destroy
+    destroy,
+    getUser
 }
