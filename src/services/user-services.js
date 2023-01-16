@@ -59,6 +59,26 @@ class UserServices{
             throw {error};
         }
     }
+    async isAuthenticated(token){
+        try {
+            const response = this.verifyToken(token)
+            if(!response){
+                console.log("error is verifying token")
+                throw {error:"Invalid token"}
+            }
+            const user = await this.userRepository.getUserById(response.id)
+            if(!user){
+                throw {error:"No user with corressponding ID"}
+            }
+            console.log(user)
+            console.log(response)
+            return user.id
+        } catch (error) {
+            console.log(error)
+            console.log("Error from userservice");
+            throw {error};
+        }
+    }
     createToken(user){
         try {
             const jwtToken = jwt.sign(user,AUTH_KEY,{expiresIn:'1h'})
