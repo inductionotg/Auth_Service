@@ -68,8 +68,35 @@ const getUser = async (req,res) =>{
     }
 }
 
+const signIn = async (req,res) =>{
+    console.log(req.body)
+    try {
+        //const response = await userService.signIn(req.body)-->THIS WILL ALSO WORK
+        const response = await userService.signIn(
+            req.body.email,
+            req.body.password
+        )
+        return res.status(201).json({
+            message:'User signed In successfully',
+            success:true,
+            data:response,
+            err:{}
+
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message:'User not signedIn successfully',
+            success:false,
+            data:{},
+            err:{error}
+        })
+    }
+}
+
 module.exports = {
     create,
     destroy,
-    getUser
+    getUser,
+    signIn
 }

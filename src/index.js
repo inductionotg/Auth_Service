@@ -34,6 +34,11 @@ const prepareAndStartServer=()=>{
        //const tokenVer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaDJzaW5oYUBnbWFpbC5jb20iLCJpZCI6MywiaWF0IjoxNjczODUwMDA3LCJleHAiOjE2NzM4NTM2MDd9.xmzMlX5-yPFaj8Ttx3w5PDK1wEbbdsbAOQjQR5CAzXo'
        //const verify = token.verifyToken(tokenVer)
        //console.log(verify)
+       /*
+       const user = new UserRepository()
+       const response = await user.getUserByEmail("ritesh2000.sinha@gmail.com")
+       console.log(response.email)
+       */
     })
 }
 prepareAndStartServer()

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const UserRepository = require('../repository/user-repository')
 const { AUTH_KEY } = require('../config/serverConfig')
+const bcrypt = require('bcrypt')
 class UserServices{
     constructor(){
         this.userRepository = new UserRepository()
@@ -38,6 +39,26 @@ class UserServices{
             throw {error};
         }
     }
+    async signIn(email,planPassword){
+        console.log("email",email,planPassword)
+        try {
+            //Step-1 --> get the userEmail and password from the user. we are getting full object of user or fetch the user using email
+            const user = await this.userRepository.getUserByEmail(email)
+            //STEP-2 --> COMPARE INCOMING PLAINpassword with the encrypted password
+            const passwordMatched = this.checkPassword(planPassword,user.password)
+            if(!passwordMatched){
+                console.log("Passwords not matched")
+                throw {error:"password not matched"}
+            }
+            //step-3 --> If passwords match then create a token and send it to the user
+            const newJWT = this.createToken({email:user.email,id:user.id}) 
+            return newJWT
+        } catch (error) {
+            console.log(error)
+            console.log("Error from userservice");
+            throw {error};
+        }
+    }
     createToken(user){
         try {
             const jwtToken = jwt.sign(user,AUTH_KEY,{expiresIn:'1h'})
@@ -55,6 +76,16 @@ class UserServices{
             return verify
         } catch (error) {
             console.log(error)
+            console.log("Error from userservice");
+            throw {error};
+        }
+    }
+
+    checkPassword(userInputPlainPassword,encryptedPassword){
+        try {
+            const compare = bcrypt.compareSync(userInputPlainPassword,encryptedPassword)
+            return compare
+        } catch (error) {
             console.log("Error from userservice");
             throw {error};
         }
