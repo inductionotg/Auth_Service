@@ -47,7 +47,9 @@ class UserRepository{
                     email:userEmail
                 }
             })
-            console.log(userByEmail)
+            if(!userByEmail){
+                throw {error:"User doesn't exist"}
+            }
             return userByEmail
         } catch (error) {
             console.log(error)

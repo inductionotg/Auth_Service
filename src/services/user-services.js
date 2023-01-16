@@ -44,6 +44,7 @@ class UserServices{
         try {
             //Step-1 --> get the userEmail and password from the user. we are getting full object of user or fetch the user using email
             const user = await this.userRepository.getUserByEmail(email)
+            console.log("userrr",user)
             //STEP-2 --> COMPARE INCOMING PLAINpassword with the encrypted password
             const passwordMatched = this.checkPassword(planPassword,user.password)
             if(!passwordMatched){
