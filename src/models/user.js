@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+       /*
+      this.belongsToMany(models.User,{
+        through:'User_Roles'
+        --> we can use this also because this refers to user class
+      */
+
       User.belongsToMany(models.Role,{
         through:'User_Roles'
       })

@@ -8,7 +8,7 @@ const apiRoutes = require('./routes/index')
 const UserRepository = require('./repository/user-repository')
 const db = require('./models/index')
 const UserServices = require('./services/user-services')
-const {User} = require('./models/index')
+const {User,Role} = require('./models/index')
 const bcrypt = require('bcrypt')
 const prepareAndStartServer=()=>{
 
@@ -43,6 +43,12 @@ const prepareAndStartServer=()=>{
        if(process.env.DB_SYNC){
             db.sequelize.sync({alter:true})
        }
+       /*
+       const user = await User.findByPk(11)
+       const role = await Role.findByPk(1)
+       const res = await user.hasRoles(role)
+       console.log(res)
+       */
     })
 }
 prepareAndStartServer()
