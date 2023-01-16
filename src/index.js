@@ -7,6 +7,7 @@ const apiRoutes = require('./routes/index')
 
 const UserRepository = require('./repository/user-repository')
 
+const UserServices = require('./services/user-services')
 const {User} = require('./models/index')
 const bcrypt = require('bcrypt')
 const prepareAndStartServer=()=>{
@@ -26,6 +27,13 @@ const prepareAndStartServer=()=>{
        /*const user = new UserRepository()
        const res = await user.getUserById(2)
        console.log(res.email,res.id)*/
+
+       //const token = new UserServices();
+       //const response = token.createToken({email:'ritesh2sinha@gmail.com',id:3})
+       //console.log(response)
+       //const tokenVer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpdGVzaDJzaW5oYUBnbWFpbC5jb20iLCJpZCI6MywiaWF0IjoxNjczODUwMDA3LCJleHAiOjE2NzM4NTM2MDd9.xmzMlX5-yPFaj8Ttx3w5PDK1wEbbdsbAOQjQR5CAzXo'
+       //const verify = token.verifyToken(tokenVer)
+       //console.log(verify)
     })
 }
 prepareAndStartServer()

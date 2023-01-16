@@ -5,7 +5,10 @@ const userService = new UserServices()
 const create = async (req,res)=>{
     try {
         console.log(req.body)
-        const response = await userService.create(req.body)
+        const response = await userService.create({
+            email:req.body.email,
+            password:req.body.password
+        })
         return res.status(200).json({
             message:'User created successfully',
             success:true,
