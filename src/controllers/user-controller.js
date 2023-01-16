@@ -2,6 +2,8 @@ const UserServices = require('../services/user-services')
 
 const userService = new UserServices()
 
+
+
 const create = async (req,res)=>{
     try {
         console.log(req.body)
