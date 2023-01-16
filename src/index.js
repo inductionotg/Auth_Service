@@ -39,7 +39,11 @@ const prepareAndStartServer=()=>{
        const response = await user.getUserByEmail("ritesh2000.sinha@gmail.com")
        console.log(response.email)
        */
-
+      /*
+       const user = new UserRepository()
+       const res= await user.isAdmin(9)
+       console.log(res)
+       */
        if(process.env.DB_SYNC){
             db.sequelize.sync({alter:true})
        }
