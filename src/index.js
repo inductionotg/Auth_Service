@@ -6,7 +6,7 @@ const { PORT } = require('./config/serverConfig')
 const apiRoutes = require('./routes/index')
 
 const UserRepository = require('./repository/user-repository')
-
+const db = require('./models/index')
 const UserServices = require('./services/user-services')
 const {User} = require('./models/index')
 const bcrypt = require('bcrypt')
@@ -39,6 +39,10 @@ const prepareAndStartServer=()=>{
        const response = await user.getUserByEmail("ritesh2000.sinha@gmail.com")
        console.log(response.email)
        */
+
+       if(process.env.DB_SYNC){
+            db.sequelize.sync({alter:true})
+       }
     })
 }
 prepareAndStartServer()
