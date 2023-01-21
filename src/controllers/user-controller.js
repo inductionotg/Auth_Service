@@ -18,12 +18,12 @@ const create = async (req,res)=>{
             err:{}
         })
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            message:'User not created successfully',
+        console.log("controller",error)
+        return res.status(error.statusCode).json({
+            message:error.message,
             success:false,
             data:{},
-            err:{error}
+            err:error.explanation
         })
     }
 }
@@ -43,7 +43,7 @@ const destroy = async (req,res) =>{
             message:'User not deleted successfully',
             success:false,
             data:{},
-            err:{error}
+            err:error
         })
     }
 }
@@ -65,7 +65,7 @@ const getUser = async (req,res) =>{
             message:'User not fetched successfully',
             success:false,
             data:{},
-            err:{error}
+            err:error
         })
     }
 }
@@ -91,7 +91,7 @@ const signIn = async (req,res) =>{
             message:'User not signedIn successfully',
             success:false,
             data:{},
-            err:{error}
+            err:error
         })
     }
 }
@@ -112,7 +112,7 @@ const isAuthenticated = async (req,res)=>{
             message:'Something went wrong',
             success:false,
             data:{},
-            err:{error}
+            err:error
         })
     }
 }
@@ -132,7 +132,7 @@ const isAdmin = async (req,res)=>{
             message:'Something went wrong',
             success:false,
             data:{},
-            err:{error}
+            err:error
         })
     }
 }

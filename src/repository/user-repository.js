@@ -1,4 +1,5 @@
 const { User,Role } = require('../models/index')
+const ValidationError = require('../utils/validation-error')
 
 class UserRepository{
 
@@ -9,8 +10,14 @@ class UserRepository{
             console.log("user repo",user)
             return user
         } catch (error) {
+            //console.log(error)
+            if(error.name === 'SequelizeValidationError'){
+                let validationError = new ValidationError(error) // or new ValidationError(error)
+                console.log(validationError)
+                throw validationError
+            }
             console.log("Error from UserRepo")
-            throw {error}
+            throw error
         }
     }
 
@@ -24,7 +31,7 @@ class UserRepository{
             return true
         } catch (error) {
             console.log("Error from UserRepo")
-            throw {error}
+            throw error
         }
     }
 
@@ -37,7 +44,7 @@ class UserRepository{
             return user
         } catch (error) {
             console.log("Error from UserRepo")
-            throw {error}
+            throw error
         }
     }
     async getUserByEmail(userEmail){
@@ -54,7 +61,7 @@ class UserRepository{
         } catch (error) {
             console.log(error)
             console.log("Error from UserRepo")
-            throw {error}
+            throw error
         }
     }
     async isAdmin(userId){
@@ -69,7 +76,7 @@ class UserRepository{
         } catch (error) {
             console.log(error)
             console.log("Error from UserRepo")
-            throw {error}
+            throw error
         }
     }
 }

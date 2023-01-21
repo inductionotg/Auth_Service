@@ -13,8 +13,11 @@ class UserServices{
             console.log("user service",user);
             return user;
         }catch(error){
+            if(error.name === 'SequelizeValidationError'){
+                throw error
+            }
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
 
@@ -25,7 +28,7 @@ class UserServices{
             return response;
         } catch (error) {
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
     async getUserById(id){
@@ -36,7 +39,7 @@ class UserServices{
             return response
         } catch (error) {
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
     async signIn(email,planPassword){
@@ -57,7 +60,7 @@ class UserServices{
         } catch (error) {
             console.log(error)
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
     async isAuthenticated(token){
@@ -77,7 +80,7 @@ class UserServices{
         } catch (error) {
             console.log(error)
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
     createToken(user){
@@ -98,7 +101,7 @@ class UserServices{
         } catch (error) {
             console.log(error)
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
 
@@ -108,7 +111,7 @@ class UserServices{
             return compare
         } catch (error) {
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
     async isAdmin(userId){
@@ -116,7 +119,7 @@ class UserServices{
             return  await this.userRepository.isAdmin(userId)
         } catch (error) {
             console.log("Error from userservice");
-            throw {error};
+            throw error;
         }
     }
 }
