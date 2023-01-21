@@ -38,6 +38,10 @@ class UserServices{
             console.log(response)
             return response
         } catch (error) {
+            console.log(error)
+            if(error.name === 'UserNullFound'){
+                throw error
+            }
             console.log("Error from userservice");
             throw error;
         }
@@ -59,6 +63,9 @@ class UserServices{
             return newJWT
         } catch (error) {
             console.log(error)
+            if(error.name ==='AttributeNotFound'){
+                throw error
+            }
             console.log("Error from userservice");
             throw error;
         }

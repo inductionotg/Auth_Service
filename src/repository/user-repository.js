@@ -1,6 +1,7 @@
 const { User,Role } = require('../models/index')
+const ClientError = require('../utils/client-error')
 const ValidationError = require('../utils/validation-error')
-
+const { StatusCodes } = require('http-status-codes')
 class UserRepository{
 
     async createUser(data){
@@ -41,8 +42,17 @@ class UserRepository{
             const user = await User.findByPk(userId,{
                 attributes: ['email', 'id']
             })
+            if(user===null){
+               throw new ClientError(
+                'UserNullFound',
+                'No user Found',
+                "UserId Not Found",
+                StatusCodes.NOT_FOUND
+               )
+            }
             return user
         } catch (error) {
+            console.log("error from repo",error.name)
             console.log("Error from UserRepo")
             throw error
         }
@@ -55,7 +65,12 @@ class UserRepository{
                 }
             })
             if(!userByEmail){
-                throw {error:"User doesn't exist"}
+                throw new ClientError(
+                    'AttributeNotFound',
+                    "No email Found in the record",
+                    "No email exist",
+                    StatusCodes.NOT_FOUND
+                )
             }
             return userByEmail
         } catch (error) {
